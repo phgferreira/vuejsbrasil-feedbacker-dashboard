@@ -9,3 +9,7 @@ Esse projeto é para treinamento do curso de VueJs do Igor Halfeld.
 [Figma do Widget](https://www.figma.com/file/VYWmc92nrhSqrgUxf6QpFj/Widget?node-id=0%3A1)
 
 [Projeto Backend](https://github.com/vuejs-br/treinamento-vue3-code/)
+
+[Tailwind CSS](https://tailwindcss.com/docs/installation/using-postcss)
+
+[Animate CSS](https://animate.style/)
