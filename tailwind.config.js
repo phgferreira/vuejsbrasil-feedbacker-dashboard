@@ -6,7 +6,7 @@ module.exports = {
   presets: [],
   darkMode: 'media', // or 'class'
   theme: {
-    extends: {
+    extend: {
       colors: palette
     },
     accentColor: ({ theme }) => ({
