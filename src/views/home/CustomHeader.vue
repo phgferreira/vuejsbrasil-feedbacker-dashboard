@@ -6,10 +6,12 @@
           <img class="w-full" src="../../assets/img/logo_white.png" alt="Logo" />
         </div>
         <div class="flex">
-          <button class="px-6 py-2 font-bold rounded-full text-white focus:outline-none">
+          <button class="px-6 py-2 font-bold rounded-full text-white focus:outline-none"
+                  @click="() => emit('create-account')">
             Crie uma conta
           </button>
-          <button class="px-6 py-2 font-bold bg-white rounded-full text-brand-main focus:outline-none">
+          <button class="px-6 py-2 font-bold bg-white rounded-full text-brand-main focus:outline-none"
+                  @click="() => emit('login')">
             Entrar
           </button>
         </div>
@@ -36,7 +38,9 @@
 
 <script>
 export default {
-  name: 'CustomHeader'
+  setup (_, { emit }) {
+    return { emit }
+  }
 }
 </script>
 

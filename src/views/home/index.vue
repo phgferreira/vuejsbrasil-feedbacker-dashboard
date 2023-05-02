@@ -13,11 +13,14 @@ import CustomHeader from '@/views/home/CustomHeader.vue'
 import Contact from '@/views/home/Contact.vue'
 import { useRouter } from 'vue-router'
 import { onMounted } from 'vue'
+import useModal from '../../hooks/useModal'
 
 export default {
   components: { CustomHeader, Contact },
   setup () {
     const router = useRouter()
+    const modal = useModal()
+
     onMounted(() => {
       const token = window.localStorage.getItem('token')
       if (token) {
@@ -25,10 +28,10 @@ export default {
       }
     })
     function handleLogin () {
-      console.log('Não implementado handleLogin ainda')
+      modal.open({ component: 'ModalLogin' })
     }
     function handleAccountCreate () {
-      console.log('Não implementado handleAccountCreate ainda')
+      modal.open({ component: 'ModalCreateAccount' })
     }
 
     return {
