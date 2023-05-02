@@ -1,7 +1,7 @@
 <template>
   <modal-factory />
   <router-view/>
-</template>jj
+</template>
 
 <script>
 import ModalFactory from '@/components/ModalFactory/index.vue'
