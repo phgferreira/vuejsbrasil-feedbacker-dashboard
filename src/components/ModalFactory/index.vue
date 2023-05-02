@@ -47,8 +47,8 @@ export default {
       modal.off(handleModalToggle)
     })
 
-    function handleModalToggle ({ payload }) {
-      console.log(payload)
+    function handleModalToggle (payload) {
+      debugger
       if (payload.status) {
         state.component = payload.component
         state.props = payload.props
@@ -58,7 +58,8 @@ export default {
         state.props = {}
         state.width = DEFAULT_WIDTH
       }
-      state.isActive = payload.state
+      state.isActive = payload.status
+      debugger
     }
     return { state, handleModalToggle }
   }
