@@ -42,10 +42,15 @@ import { reactive } from 'vue'
 import useModal from '@/hooks/useModal'
 import { useField } from 'vee-validate'
 import { validateEmptyAndEmail, validateEmptyAndLength3 } from '@/utils/validators'
+import services from '@/services'
+import { useRouter } from 'vue-router'
+import { useToast } from 'vue-toastification'
 
 export default {
   setup () {
     const modal = useModal()
+    const router = useRouter()
+    const toast = useToast()
 
     const {
       value: emailValue,
@@ -69,8 +74,38 @@ export default {
       }
     })
 
-    function handleSubmit () {
-      alert(`Login com usuário ${state.email.value} e senha ${state.password.value}`)
+    async function handleSubmit () {
+      try {
+        toast.clear()
+        state.isLoading = true
+        const { data, errors } = await services.auth.login({
+          email: state.email.value,
+          password: state.password.value
+        })
+        if (!errors) {
+          window.localStorage.setItem('token', data.token)
+          router.push({ name: 'Feedback' })
+          state.isLoading = false
+          modal.close()
+          return
+        }
+        switch (errors.status) {
+          case 404:
+            toast.error('E-mail não encontrado')
+            break
+          case 401:
+            toast.error('E-mail ou senha inválidos')
+            break
+          case 400:
+            toast.error('Ocorreu um erro ao fazer o login')
+            break
+        }
+        state.isLoading = false
+      } catch (exception) {
+        state.isLoading = false
+        state.hasError = !!exception
+        toast.error('Ocorreu um erro ao fazer o login')
+      }
     }
 
     return { state, close: modal.close, handleSubmit }
