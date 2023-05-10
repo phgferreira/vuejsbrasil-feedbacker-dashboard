@@ -3,7 +3,16 @@
 </template>
 
 <script>
-export default {}
+import { onMounted } from 'vue'
+
+export default {
+  setup () {
+    onMounted(() => {
+      // FIXME: Temporário apenas para forçar o logoff
+      window.localStorage.setItem('token', '')
+    })
+  }
+}
 </script>
 
 <style scoped>
