@@ -87,7 +87,7 @@ export default {
         })
         if (!errors) {
           window.localStorage.setItem('token', data.token)
-          router.push({ name: 'Feedback' })
+          router.push({ name: 'Feedbacks' })
           state.isLoading = false
           modal.close()
           return
@@ -108,6 +108,7 @@ export default {
         state.isLoading = false
         state.hasError = !!exception
         toast.error('Ocorreu um erro ao fazer o login')
+        console.log(exception)
       }
     }
 
