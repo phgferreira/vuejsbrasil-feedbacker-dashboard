@@ -4,9 +4,6 @@
 
 <script>
 export default {
-  setup () {
-    console.log('feedback')
-  }
 }
 </script>
 
