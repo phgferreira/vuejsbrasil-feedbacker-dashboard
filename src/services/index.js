@@ -27,11 +27,6 @@ httpClient.interceptors.response.use((response) => {
   setGlobalLoading(false)
   return response
 }, (error) => {
-  /* FIXME: TypeError: Cannot read properties of undefined (reading 'status')
-    at eval (index.js:30:1)
-    at async Object.login (auth.js:19:1)
-    at async Proxy.handleSubmit (index.vue:84:1)
-   */
   const canThrowAnError = error.request.status === 0 ||
     error.request.status === 500
   if (canThrowAnError) {

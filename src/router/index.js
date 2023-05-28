@@ -17,10 +17,10 @@ const routes = [
   {
     path: '/credencials',
     name: 'Credencials',
-    component: () => import('../views/credencials/index.vue')
-    // meta: {
-    //   hasAuth: true
-    // }
+    component: () => import('../views/credencials/index.vue'),
+    meta: {
+      hasAuth: true
+    }
   },
   {
     path: '/:pathMatch(.*)*',

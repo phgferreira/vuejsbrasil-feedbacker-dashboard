@@ -13,9 +13,7 @@ import { setCurrentUser } from '@/store/user'
 export default {
   components: { ModalFactory },
   setup () {
-    // Realiza ações relacionadas a rotas
     const router = useRouter()
-    // Pega as informações da rota atual
     const route = useRoute()
 
     watch(() => route.path, async () => {
