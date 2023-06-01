@@ -10,7 +10,7 @@
 
       <label class="block">
         <span class="text-lg font-medium text-gray-800">E-Mail</span>
-        <input v-model="state.email.value" type="email"
+        <input v-model="state.email.value" v-focus type="email"
                class="block w-full px-4 py-3 mt-1 text-lg bg-gray-100 border-2 border-transparent rounded"
                :class="{'border-brand-danger' : !!state.email.errorMessage}"
                placeholder="paulo.ferreira@vuejs.com.br"
@@ -50,6 +50,13 @@ import Icon from '@/components/Icon/index.vue'
 
 export default {
   components: { Icon },
+  directives: {
+    focus: {
+      mounted (elemento) {
+        elemento.focus()
+      }
+    }
+  },
   setup () {
     const modal = useModal()
     const router = useRouter()
