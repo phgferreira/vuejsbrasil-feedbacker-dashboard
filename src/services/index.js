@@ -3,6 +3,7 @@ import AuthService from './auth'
 import router from '@/router'
 import UsersService from './users'
 import { setGlobalLoading } from '@/store/global'
+import Feedbacks from '@/services/feedbacks'
 
 const API_ENVS = {
   production: '',
@@ -42,5 +43,6 @@ httpClient.interceptors.response.use((response) => {
 
 export default {
   auth: AuthService(httpClient),
-  users: UsersService(httpClient)
+  users: UsersService(httpClient),
+  feedbacks: Feedbacks(httpClient)
 }
