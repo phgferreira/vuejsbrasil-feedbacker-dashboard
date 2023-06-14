@@ -18,7 +18,7 @@ export default {
       default: 80,
       type: Number
     },
-    aimationDuration: {
+    animationDuration: {
       default: '1.6s',
       type: String
     },

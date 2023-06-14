@@ -18,10 +18,12 @@
         <h1 class="text-3xl font-black text-brand-darkgray">Listagem</h1>
         <suspense>
           <template #default>
-            <filters />
+            <filters
+              class="mt-8 animate__animated animate__fadeIn animate__faster"
+            />
           </template>
           <template #fallback>
-            loading....
+            <filters-loading class="mt-8" />
           </template>
         </suspense>
       </div>
@@ -36,8 +38,9 @@
 <script>
 import HeaderLogged from '@/components/HeaderLogged/index.vue'
 import Filters from '@/views/feedbacks/Filters.vue'
+import FiltersLoading from '@/views/feedbacks/FiltersLoading.vue'
 
 export default {
-  components: { Filters, HeaderLogged }
+  components: { Filters, HeaderLogged, FiltersLoading }
 }
 </script>

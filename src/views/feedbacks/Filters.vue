@@ -13,7 +13,7 @@
       <div class="flex items-center">
         <span
           :class="`bg-${filter.color}`"
-          class="inline-block w-2 h-2 rounded-full"
+          class="inline-block w-2 h-2 rounded-full mr-2"
         />
         {{ filter.label }}
       </div>
