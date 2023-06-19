@@ -28,7 +28,22 @@
         </suspense>
       </div>
       <div class="px-10 pt-20 col-span-3">
-        Feedbacks
+        <p v-if="state.hasError" class="text-lg text-center text-gray-800 font-regular">
+          Aconteceu um erro ao carregar os feedbacks 🥺
+        </p>
+        <p v-if="!state.feedbacks.length && !state.isLoading" class="text-lg text-center text-gray-800 font-regular">
+          Ainda nenhum feedback recebido 🧐
+        </p>
+
+        <feedback-card-loading v-if="state.isLoading" />
+        <feedback-card
+          v-else
+          v-for="(feedback, index) in state.feedbacks"
+          :key="feedback.id"
+          :is-open="index === 0"
+          :feedback="feedback"
+          class="mb-8"
+        />
       </div>
     </div>
   </div>
@@ -39,8 +54,48 @@
 import HeaderLogged from '@/components/HeaderLogged/index.vue'
 import Filters from '@/views/feedbacks/Filters.vue'
 import FiltersLoading from '@/views/feedbacks/FiltersLoading.vue'
+import { onMounted, reactive } from 'vue'
+import FeedbackCardLoading from '@/views/feedbacks/FeedbackCard/FeedbackCardLoading.vue'
+import FeedbackCard from '@/views/feedbacks/FeedbackCard/index.vue'
+import services from '@/services'
 
 export default {
-  components: { Filters, HeaderLogged, FiltersLoading }
+  components: { FeedbackCard, FeedbackCardLoading, Filters, HeaderLogged, FiltersLoading },
+  setup () {
+    const state = reactive({
+      isLoading: false,
+      feedbacks: [],
+      currentFeedbakType: '',
+      pagination: {
+        limit: 5,
+        offset: 0
+      },
+      hasError: false
+    })
+
+    onMounted(() => fetchFeedbacks())
+
+    function handleErrors (error) {
+      state.hasError = !!error
+      state.isLoading = false
+    }
+
+    async function fetchFeedbacks () {
+      try {
+        state.isLoading = true
+        const { data } = await services.feedbacks.getAll({
+          ...state.pagination,
+          type: state.currentFeedbackType
+        })
+        state.feedbacks = data.results
+        state.pagination = data.pagination
+        state.isLoading = false
+      } catch (error) {
+        handleErrors(error)
+      }
+    }
+
+    return { state, fetchFeedbacks }
+  }
 }
 </script>
