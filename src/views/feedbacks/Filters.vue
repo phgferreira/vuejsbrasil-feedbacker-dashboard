@@ -95,7 +95,7 @@ export default {
       emit('select', type)
     }
 
-    return { state, handleSelet: handleSelect }
+    return { state, handleSelect }
   }
 }
 </script>

@@ -20,6 +20,7 @@
           <template #default>
             <filters
               class="mt-8 animate__animated animate__fadeIn animate__faster"
+              @select="changeFeedbacksType"
             />
           </template>
           <template #fallback>
@@ -35,7 +36,7 @@
           Ainda nenhum feedback recebido 🧐
         </p>
 
-        <feedback-card-loading v-if="state.isLoading" />
+        <feedback-card-loading v-if="state.isLoading || state.isLoadingFeedbacks" />
         <feedback-card
           v-else
           v-for="(feedback, index) in state.feedbacks"
@@ -64,6 +65,7 @@ export default {
   setup () {
     const state = reactive({
       isLoading: false,
+      isLoadingFeedbacks: false,
       feedbacks: [],
       currentFeedbackType: '',
       pagination: {
@@ -76,8 +78,26 @@ export default {
     onMounted(() => fetchFeedbacks())
 
     function handleErrors (error) {
-      state.hasError = !!error
       state.isLoading = false
+      state.hasError = !!error
+    }
+
+    async function changeFeedbacksType (type) {
+      try {
+        state.isLoadingFeedbacks = true
+        state.pagination.offset = 0
+        state.pagination.limit = 5
+        state.currentFeedbackType = type
+        const { data } = await services.feedbacks.getAll({
+          type,
+          ...state.pagination
+        })
+        state.feedbacks = data.results
+        state.pagination = data.pagination
+        state.isLoadingFeedbacks = false
+      } catch (error) {
+        handleErrors(error)
+      }
     }
 
     async function fetchFeedbacks () {
@@ -95,7 +115,7 @@ export default {
       }
     }
 
-    return { state, fetchFeedbacks }
+    return { state, changeFeedbacksType, fetchFeedbacks }
   }
 }
 </script>
