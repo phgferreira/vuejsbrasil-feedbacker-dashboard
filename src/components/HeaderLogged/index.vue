@@ -20,6 +20,7 @@
         <li
           class="px-6 py-2 font-bold bg-white rounded-full cursor-pointer text-brand-main focus:outline-none"
           @click="handleLogout"
+          data-test="logout-button"
         >
           {{ logoutLabel }}
         </li>
