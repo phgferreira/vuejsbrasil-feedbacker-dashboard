@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between">
+  <div class="flex justify-between" data-cy="modal-login">
     <h1 class="text-4xl font-black text-gray-800 focus:outline-none">Entre na sua conta</h1>
     <button class="text-4xl text-gray-600" @click="close">
       Fechar
@@ -14,8 +14,15 @@
                class="block w-full px-4 py-3 mt-1 text-lg bg-gray-100 border-2 border-transparent rounded"
                :class="{'border-brand-danger' : !!state.email.errorMessage}"
                placeholder="paulo.ferreira@vuejs.com.br"
+               data-cy="email-field"
         >
-        <span v-if="!!state.email.errorMessage" class="block font-medium text-brand-danger">{{ state.email.errorMessage }}</span>
+        <span
+          v-if="!!state.email.errorMessage"
+          class="block font-medium text-brand-danger"
+          data-cy="email-error"
+        >
+          {{ state.email.errorMessage }}
+        </span>
       </label>
 
       <label class="block mt-9">
@@ -23,13 +30,20 @@
         <input v-model="state.password.value" type="password"
                class="block w-full px-4 py-3 mt-1 text-lg bg-gray-100 border-2 border-transparent rounded"
                :class="{'border-brand-danger' : !!state.password.errorMessage}"
+               data-cy="password-field"
         >
-        <span v-if="!!state.password.errorMessage" class="block font-medium text-brand-danger">{{ state.password.errorMessage }}</span>
+        <span
+          v-if="!!state.password.errorMessage"
+          class="block font-medium text-brand-danger"
+        >
+          {{ state.password.errorMessage }}
+        </span>
       </label>
 
       <button type="submit" :disabled="state.isLoading"
               class="px-8 py-3 mt-10 text-2x1 font-bold text-white rounded-full bg-brand-main focus:outline-none transition-all duration-150"
               :class="{'opacity-50' : state.isLoading }"
+              data-cy="login-button"
       >
         <icon v-if="state.isLoading" name="loading" class="animate-spin" />
         <span v-else>Entrar</span>
