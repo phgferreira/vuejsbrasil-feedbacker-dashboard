@@ -24,10 +24,17 @@
       <content-loader v-if="store.Global.isLoading || state.isLoading" class="rounded" width="600px" height="50px" />
       <div v-else class="flex py-3 pl-5 mt-2 rounded justify-between items-center bg-brand-gray w-full lg:w-2/3">
         <span v-if="state.hasError">Erro ao carregar a apikey</span>
-        <span v-else>{{ store.User.currentUser.apiKey }}</span>
+        <span v-else data-cy="api-key">{{ store.User.currentUser.apiKey }}</span>
         <div v-if="!state.hasError" class="flex ml-20 mr-5">
           <icon @click="handleCopy" name="copy" :color="brandColors.graydark" size="24" class="cursor-pointer" />
-          <icon @click="handleGenerateApiKey" name="loading" :color="brandColors.graydark" size="24" class="cursor-pointer ml-3" />
+          <icon
+            name="loading"
+            size="24"
+            class="cursor-pointer ml-3"
+            :color="brandColors.graydark"
+            @click="handleGenerateApiKey"
+            data-cy="generate-api-key"
+          />
         </div>
       </div>
 
