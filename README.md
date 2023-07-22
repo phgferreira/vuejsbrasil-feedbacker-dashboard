@@ -1,4 +1,4 @@
-# vuejsbrasil-feedback
+# vuejsbrasil-feedbacker-dashboard
 
 Esse projeto é para treinamento do curso de VueJs do Igor Halfeld.
 
