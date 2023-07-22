@@ -132,7 +132,6 @@ export default {
         state.isLoading = false
         state.hasError = !!exception
         toast.error('Ocorreu um erro ao criar a conta')
-        console.log(exception)
       }
     }
 
