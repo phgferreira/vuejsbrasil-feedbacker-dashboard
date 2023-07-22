@@ -13,5 +13,3 @@ Esse projeto é para treinamento do curso de VueJs do Igor Halfeld.
 [Tailwind CSS](https://tailwindcss.com/docs/installation/using-postcss)
 
 [Animate CSS](https://animate.style/)
-
-Testando mudança de repositório
