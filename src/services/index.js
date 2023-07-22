@@ -7,7 +7,7 @@ import Feedbacks from '@/services/feedbacks'
 
 const API_ENVS = {
   production: 'https://vuejsbrasil-feedbacker-backend.vercel.app/',
-  development: '',
+  development: 'http://localhost:3000',
   local: 'http://localhost:3000'
 }
 
@@ -16,6 +16,9 @@ const httpClient = axios.create({
 })
 
 httpClient.interceptors.request.use(config => {
+  console.log('### CONSOLE.LOG ###')
+  console.log(process.env.NODE_ENV)
+  console.log(httpClient)
   setGlobalLoading(true)
   const token = window.localStorage.getItem('token')
   if (token) {
